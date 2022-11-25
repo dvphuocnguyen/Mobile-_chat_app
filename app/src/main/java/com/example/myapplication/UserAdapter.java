@@ -1,17 +1,36 @@
 package com.example.myapplication;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
-    @androidx.annotation.NonNull
+
+    private Context context;
+    private List<UserModel> userModelList;
+    public UserAdapter(Context context){
+        this.context = context;
+        userModelList = new ArrayList<>();
+    }
+    public void add(UserModel userModel){
+        userModelList.add(userModel);
+        notifyDataSetChanged();
+    }
+    public void clear(){
+        userModelList.clear();
+        notifyDataSetChanged();
+    }
+
+    @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@androidx.annotation.NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row,parent,false);
@@ -19,13 +38,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@androidx.annotation.NonNull MyViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        UserModel userModel = userModelList.get(position);
+        holder.name.setText(userModel.getUserName());
+        holder.email.setText(userModel.getUserEmail());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+      return userModelList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -34,7 +55,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
             super(itemView);
             name=itemView.findViewById(R.id.userName);
             email=itemView.findViewById(R.id.userEmail);
-
         }
     }
 

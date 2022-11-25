@@ -3,11 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/PC/Desktop/Mobile-_chat_app/app/src/main/res/drawable/person.xml" value="0.124" />
-        <entry key="..\:/Users/PC/Desktop/Mobile-_chat_app/app/src/main/res/layout/user_row.xml" value="0.4503968253968254" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.1705" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.181" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/drawable/logout.xml" value="0.172" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/drawable/person.xml" value="0.181" />
         <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/activity_authentication.xml" value="0.17552083333333332" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/activity_chat.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/activity_user_model.xml" value="0.17135416666666667" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/mess_row.xml" value="0.12273550724637682" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/message_row.xml" value="0.12273550724637682" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/user_row.xml" value="0.22" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/layout/user_row1.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/TechCare/Desktop/mobile_app/Mobile-_chat_app/app/src/main/res/menu/main_menu.xml" value="0.17447916666666666" />
       </map>
     </option>
   </component>
