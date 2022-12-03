@@ -6,56 +6,132 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+import com.example.myapplication.Model.Chats;
+import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder>{
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MyViewHolder> {
 
-    private Context context;
-    private List<UserModel> userModelList;
-    public UserAdapter(Context context){
+
+    Context context;
+    List<Chats> chatslist;
+    String imageURL;
+
+    public static final int MESSAGE_RIGHT = 0; // FOR ME (
+    public static final int MESSAGE_LEFT = 1; // FOR FRIEND
+
+
+
+    public MessageAdapter(Context context, List<Chats> chatslist, String imageURL) {
         this.context = context;
-        userModelList = new ArrayList<>();
-    }
-    public void add(UserModel userModel){
-        userModelList.add(userModel);
-        notifyDataSetChanged();
-    }
-    public void clear(){
-        userModelList.clear();
-        notifyDataSetChanged();
+        this.chatslist = chatslist;
+        this.imageURL = imageURL;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@androidx.annotation.NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row,parent,false);
-        return new MyViewHolder(view);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        if (viewType == MESSAGE_RIGHT) {
+
+            View view = LayoutInflater.from(context).inflate(R.layout.chat_item_right, parent, false);
+            return new MyViewHolder(view);
+
+
+        } else {
+
+            View view = LayoutInflater.from(context).inflate(R.layout.chat_item_left, parent, false);
+            return new MyViewHolder(view);
+
+        }
+
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        UserModel userModel = userModelList.get(position);
-        holder.name.setText(userModel.getUserName());
-        holder.email.setText(userModel.getUserEmail());
+
+        Chats chats  = chatslist.get(position);
+
+        holder.messagetext.setText(chats.getMessage());
+
+
+        if (imageURL.equals("default")) {
+
+
+            holder.imageView.setImageResource(R.drawable.user);
+        } else {
+
+            Glide.with(context).load(imageURL).into(holder.imageView);
+        }
+
+
+        if (position == chatslist.size() -1) {
+
+            if (chats.isIsseen()) {
+
+                holder.seen.setText("seen");
+
+
+            } else {
+                holder.seen.setText("Delivered");
+            }
+
+        } else {
+            holder.seen.setVisibility(View.GONE);
+        }
+
+
+
     }
 
     @Override
     public int getItemCount() {
-      return userModelList.size();
+        return chatslist.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView name,email;
+    class MyViewHolder extends RecyclerView.ViewHolder{
+
+        TextView messagetext, seen;
+        CircleImageView imageView;
+
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.userName);
-            email=itemView.findViewById(R.id.userEmail);
+
+            messagetext = itemView.findViewById(R.id.show_message);
+            imageView = itemView.findViewById(R.id.chat_image);
+            seen = itemView.findViewById(R.id.text_Seen);
         }
     }
 
+
+    @Override
+    public int getItemViewType(int position) {
+
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        assert user != null;
+        if (chatslist.get(position).getSender().equals(user.getUid())) {
+
+
+            return MESSAGE_RIGHT;
+        } else {
+
+            return MESSAGE_LEFT;
+
+
+        }
+    }
 }

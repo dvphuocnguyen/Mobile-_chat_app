@@ -20,7 +20,7 @@ public class ChatActivity extends AppCompatActivity {
     String recieverId;
     DatabaseReference databaseReference;
     String senderRoom, recieverRoom;
-    MessAdapter messAdapter;
+    MessageAdapter messAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class ChatActivity extends AppCompatActivity {
        senderRoom = FirebaseAuth.getInstance().getUid()+recieverId;
        recieverRoom = recieverId+FirebaseAuth.getInstance().getUid();
 
-       messAdapter = new MessAdapter(this);
+       messAdapter = new MessageAdapter(this);
         binding.recycler.setAdapter(messAdapter);
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
        databaseReference = FirebaseDatabase.getInstance().getReference("chats").child(senderRoom);
